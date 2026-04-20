@@ -9,11 +9,21 @@ class BaseModel:
 	"""
 	base model class.
 	"""
-	def __init__(self):
+	def __init__(self, *args, **kwargs):
     
 		self.updated_at = datetime.now()
 		self.id = str(uuid.uuid4())
 		self.created_at = datetime.now()
+
+		if (kwargs is not None) and (args is None or len(args) == 0):
+			for key in ["name", "my_number", "id", "updated_at", "created_at"]:
+				if key in kwargs:
+					setattr(self, key, kwargs[key])
+			if "created_at" in kwargs:
+				self.created_at = datetime.fromisoformat(kwargs["created_at"])
+				
+			if "updated_at" in kwargs:
+				self.updated_at = datetime.fromisoformat(kwargs["updated_at"])
 
 	def __str__(self):
         
