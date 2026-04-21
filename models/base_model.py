@@ -3,6 +3,7 @@
 Base model.
 """
 import uuid
+from models import storage
 from datetime import datetime
 
 
@@ -13,19 +14,20 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
 
-        self.updated_at = datetime.now()
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
+        if "created_at" in kwargs:
+            self.created_at = datetime.fromisoformat(kwargs["created_at"])
+        else:
+            self.created_at = datetime.now()
 
-        if (kwargs is not None) and (args is None or len(args) == 0):
-            for key in ["name", "my_number", "id", "updated_at", "created_at"]:
-                if key in kwargs:
-                    setattr(self, key, kwargs[key])
-            if "created_at" in kwargs:
-                self.created_at = datetime.fromisoformat(kwargs["created_at"])
-
-            if "updated_at" in kwargs:
-                self.updated_at = datetime.fromisoformat(kwargs["updated_at"])
+        if "updated_at" in kwargs:
+            self.updated_at = datetime.fromisoformat(kwargs["updated_at"])
+        else:
+            self.updated_at = datetime.now()
+        if "id" in kwargs:
+            self.id = kwargs["id"]
+        else:
+            self.id = str(uuid.uuid4())
+        storage.new(self)
 
     def __str__(self):
 
@@ -40,6 +42,7 @@ class BaseModel:
         saves new date.
         """
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """
