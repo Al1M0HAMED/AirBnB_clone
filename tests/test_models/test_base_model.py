@@ -27,14 +27,25 @@ class TestBaseModel_to_dict(unittest.TestCase):
     """
     test to dict method.
     """
-    pass
+    def test_att(self):
+        bm = BaseModel()
+        bm.to_dict()
+        self.assertIn("id", bm.to_dict())
+        self.assertIn("created_at", bm.to_dict())
+        self.assertIn("updated_at", bm.to_dict())
 
 
 class TestBaseModel_save(unittest.TestCase):
     """
     test save method.
     """
-    pass
+    def test_time(self):
+        bm = BaseModel()
+        sleep(0.05)
+        first_updated_at = bm.updated_at
+        bm.save()
+        self.assertLess(first_updated_at, bm.updated_at)
+
 
 if __name__ == "__main__":
     unittest.main()
