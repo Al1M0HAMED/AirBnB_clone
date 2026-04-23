@@ -2,10 +2,8 @@
 """
 a simple File Storage for BaseModel instances.
 """
-from models.base_model import BaseModel
 import json
 import os
-
 
 class FileStorage:
 
@@ -40,6 +38,7 @@ class FileStorage:
         """
         loads a list of objects from a json file.
         """
+        from models.base_model import BaseModel
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r", encoding="utf-8") as file:
                 data = json.load(file)
@@ -52,4 +51,4 @@ class FileStorage:
                     continue
                 cls = classes.get(cls_name)
                 if cls:
-                    FileStorage.new(cls(**value))
+                    self.new(cls(**value))
