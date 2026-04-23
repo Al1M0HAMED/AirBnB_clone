@@ -6,7 +6,7 @@ import os
 from datetime import datetime
 from time import sleep
 import unittest
-from models import BaseModel
+from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
@@ -17,7 +17,7 @@ class TestBaseModel(unittest.TestCase):
         """
         test attributes.
         """
-        bm = BaseModel
+        bm = BaseModel()
         self.assertEqual(str, type(bm.id))
         self.assertEqual(datetime, type(bm.created_at))
         self.assertEqual(datetime, type(bm.updated_at))
