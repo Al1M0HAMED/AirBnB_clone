@@ -65,11 +65,14 @@ class TestFileStorage_methods(unittest.TestCase):
         """
         import models
         bm = BaseModel()
-        objs = FileStorage._FileStorage__objects
+        models.storage.new(bm)
         models.storage.save()
         models.storage._FileStorage__objects = {}
         models.storage.reload()
-        self.assertIn("BaseModel." + bm.id, objs)
+        self.assertIn(
+            "BaseModel." + bm.id,
+            models.storage.all()
+        )
 
 
 if __name__ == "__main__":
