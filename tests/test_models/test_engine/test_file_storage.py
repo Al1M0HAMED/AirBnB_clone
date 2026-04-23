@@ -74,6 +74,9 @@ class TestFileStorage_methods(unittest.TestCase):
             models.storage.all()
         )
 
-
+    def test_reload_with_arg(self):
+        import models
+        with self.assertRaises(TypeError):
+            models.storage.reload(None)
 if __name__ == "__main__":
     unittest.main()
