@@ -37,7 +37,7 @@ class TestFileStorage_methods(unittest.TestCase):
         self.models.storage.new(bm)
         self.assertIn("BaseModel." + bm.id, self.models.storage.all().keys())
 
-    def test_all(self):
+    def test_save(self):
         """
         test save method
         """
