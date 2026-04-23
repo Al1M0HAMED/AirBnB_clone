@@ -45,7 +45,8 @@ class TestFileStorage_methods(unittest.TestCase):
         with self.assertRaises(TypeError):
             models.storage.save(None)
         bm = BaseModel()
-        models.storage.new(bm)
+        self.models.storage.new(bm)
+        self.models.storage.save()
         save_text = ""
         with open("file.json", "r") as f:
             save_text = f.read()
@@ -62,8 +63,11 @@ class TestFileStorage_methods(unittest.TestCase):
         """
         test reload method
         """
+        import models
         bm = BaseModel()
         objs = FileStorage._FileStorage__objects
+        models.storage.save()
+        models.storage.reload()
         self.assertIn("BaseModel." + bm.id, objs)
 
 
