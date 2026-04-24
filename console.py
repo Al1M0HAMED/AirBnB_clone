@@ -116,11 +116,11 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        for obj in objects.values():
-            if str(obj.__class__.__name__) == args[0]:
-                objects_list.append(obj)
-
-        print(objects_list)
+        print([
+            str(obj)
+            for obj in objects.values()
+            if obj.__class__.__name__ == args[0]
+        ])
 
     def do_update(self, arg):
         """update an instance attribute.
