@@ -25,6 +25,9 @@ class BaseModel:
             self.updated_at = datetime.now()
             storage.new(self)
 
+    def __repr__(self):
+        return self.__str__()
+
     def __str__(self):
 
         return (
