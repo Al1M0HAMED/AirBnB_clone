@@ -108,19 +108,20 @@ class HBNBCommand(cmd.Cmd):
         args = shlex.split(arg)
         models.storage.reload()
         objects = models.storage.all()
-        if len(args) < 1:
-            print("** class name missing **")
-            return
 
-        if args[0] not in self.classes:
+        if len(args) == 0:
+            for obj in objects.values():
+                objects_list.append(obj)
+
+        elif args[0] not in self.classes:
             print("** class doesn't exist **")
             return
+        if len(args) > 0:
+            for obj in objects.values():
+                if str(obj.__class__.__name__) == args[0]:
+                   objects_list.append(obj)
 
-        print([
-            str(obj)
-            for obj in objects.values()
-            if obj.__class__.__name__ == args[0]
-        ])
+        print(objects_list) 
 
     def do_update(self, arg):
         """update an instance attribute.
