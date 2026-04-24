@@ -119,9 +119,8 @@ class HBNBCommand(cmd.Cmd):
         if len(args) > 0:
             for obj in objects.values():
                 if str(obj.__class__.__name__) == args[0]:
-                   objects_list.append(obj)
-
-        print(objects_list) 
+                    objects_list.append(obj)
+        print(objects_list)
 
     def do_update(self, arg):
         """update an instance attribute.
