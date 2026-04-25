@@ -2,6 +2,7 @@
 """
 cli.
 """
+from models.user import User
 import shlex
 import os
 import cmd
@@ -15,7 +16,8 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb) "
     classes = {
-        "BaseModel": BaseModel
+        "BaseModel": BaseModel,
+        "User": User
     }
 
     def do_quit(self, arg):
