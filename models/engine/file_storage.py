@@ -39,14 +39,25 @@ class FileStorage:
         """
         loads a list of objects from a json file.
         """
+
         from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.place import Place
+        from models.amenity import Amenity
+        from models.review import Review
         from models.base_model import BaseModel
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r", encoding="utf-8") as file:
                 data = json.load(file)
             classes = {
                 "BaseModel": BaseModel,
-                "User": User
+                "User": User,
+                "City": City,
+                "Place": Place,
+                "Review": Review,
+                "State": State,
+                "Amenity": Amenity
             }
             for key, value in data.items():
                 cls_name = value.get("__class__")

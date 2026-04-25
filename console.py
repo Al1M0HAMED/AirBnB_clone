@@ -2,6 +2,11 @@
 """
 cli.
 """
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 from models.user import User
 import shlex
 import os
@@ -17,7 +22,12 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     classes = {
         "BaseModel": BaseModel,
-        "User": User
+        "User": User,
+        "City": City,
+        "Place": Place,
+        "Review": Review,
+        "State": State,
+        "Amenity": Amenity
     }
 
     def do_quit(self, arg):
